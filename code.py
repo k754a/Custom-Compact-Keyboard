@@ -19,22 +19,17 @@ pin_map = {
     8: board.GP8,  
 }
 
+last_press_time = {i: 0 for i in range(9)}
+debounce_delay = 0.1  
+button_state = {i: False for i in range(9)}  
+
 def key_action_0():
-
-   
-
-def key_action_1():
-
-   
-
-def key_action_2():
-
     print("Ending script...")
     while True:
         pass  
 
 def type_text(text):
-   
+    """Helper function to type text as quickly as possible."""
     for char in text:
         if char == ':':
             keyboard.press(Keycode.SHIFT)
@@ -45,7 +40,7 @@ def type_text(text):
             keyboard.press(Keycode.ONE)
             keyboard.release_all()
         elif char == '/':
-            keyboard.press(Keycode.SLASH)
+            keyboard.press(Keycode.SLASH)  
             keyboard.release_all()
         elif char == '.':
             keyboard.press(Keycode.PERIOD)
@@ -61,7 +56,6 @@ def type_text(text):
             keyboard.press(Keycode.SHIFT)
             keyboard.press(getattr(Keycode, f"{char}"))
             keyboard.release_all()
-            time.sleep(0.1)
             keyboard.release(Keycode.SHIFT)
         elif char.islower():
             keyboard.press(getattr(Keycode, f"{char.upper()}"))
@@ -70,67 +64,77 @@ def type_text(text):
             keyboard.press(Keycode.SPACE)
             keyboard.release_all()
         else:
-
             pass
-        time.sleep(0.1)
 
-def key_action_3():
-
+def key_action_1():
     keyboard.press(Keycode.WINDOWS)
     keyboard.press(Keycode.R)
     keyboard.release_all()
-    time.sleep(0.5)
-    type_text("explorer.exe shell:appsFolder\\Microsoft.MinecraftUWP_8wekyb3d8bbwe!App")
-    keyboard.press(Keycode.ENTER)
-    keyboard.release_all()
-
-def key_action_4():
-
-    keyboard.press(Keycode.WINDOWS)
-    keyboard.press(Keycode.R)
-    keyboard.release_all()
-    time.sleep(0.5)
-    type_text("steam")
-    keyboard.press(Keycode.ENTER)
-    keyboard.release_all()
-
-def key_action_5():
-
-    keyboard.press(Keycode.WINDOWS)
-    keyboard.press(Keycode.R)
-    keyboard.release_all()
-    time.sleep(0.5)
-    type_text("nms")
-    keyboard.press(Keycode.ENTER)
-    keyboard.release_all()
-
-def key_action_6():
-
-    keyboard.press(Keycode.WINDOWS)
-    keyboard.press(Keycode.R)
-    keyboard.release_all()
-    time.sleep(0.5)
+    time.sleep(0.2)  
     type_text("code")
     keyboard.press(Keycode.ENTER)
     keyboard.release_all()
 
-def key_action_7():
-
+def key_action_2():
     keyboard.press(Keycode.WINDOWS)
     keyboard.press(Keycode.R)
     keyboard.release_all()
-    time.sleep(0.5)
+    time.sleep(0.2)  
     type_text("devenv")
     keyboard.press(Keycode.ENTER)
     keyboard.release_all()
 
-def key_action_8():
-
+def key_action_3():
     keyboard.press(Keycode.WINDOWS)
     keyboard.press(Keycode.R)
     keyboard.release_all()
-    time.sleep(0.5)
-    type_text("pycharm")
+    time.sleep(0.2)  
+    type_text("notepad")
+    keyboard.press(Keycode.ENTER)
+    keyboard.release_all()
+
+def key_action_4():
+    keyboard.press(Keycode.WINDOWS)
+    keyboard.press(Keycode.R)
+    keyboard.release_all()
+    time.sleep(0.2)  
+    type_text("cmd")
+    keyboard.press(Keycode.ENTER)
+    keyboard.release_all()
+
+def key_action_5():
+    keyboard.press(Keycode.WINDOWS)
+    keyboard.press(Keycode.R)
+    keyboard.release_all()
+    time.sleep(0.2)  
+    type_text("powershell")
+    keyboard.press(Keycode.ENTER)
+    keyboard.release_all()
+
+def key_action_6():
+    keyboard.press(Keycode.WINDOWS)
+    keyboard.press(Keycode.R)
+    keyboard.release_all()
+    time.sleep(0.2)  
+    type_text("explorer")
+    keyboard.press(Keycode.ENTER)
+    keyboard.release_all()
+
+def key_action_7():
+    keyboard.press(Keycode.WINDOWS)
+    keyboard.press(Keycode.R)
+    keyboard.release_all()
+    time.sleep(0.2)  
+    type_text("mspaint")
+    keyboard.press(Keycode.ENTER)
+    keyboard.release_all()
+
+def key_action_8():
+    keyboard.press(Keycode.WINDOWS)
+    keyboard.press(Keycode.R)
+    keyboard.release_all()
+    time.sleep(0.2)  
+    type_text("control")
     keyboard.press(Keycode.ENTER)
     keyboard.release_all()
 
@@ -141,31 +145,35 @@ for i in range(9):
     pins[i].pull = digitalio.Pull.DOWN  
 
 while True:
-    if pins[0].value:  
-        key_action_0()
+    current_time = time.monotonic()
+    for i in range(9):
+        if pins[i].value:
+            if not button_state[i]:  
 
-    if pins[1].value:  
-        key_action_1()
+                button_state[i] = True
+                if (current_time - last_press_time[i]) > debounce_delay:
+                    if i == 0:
+                        key_action_0()
+                    elif i == 1:
+                        key_action_1()
+                    elif i == 2:
+                        key_action_2()
+                    elif i == 3:
+                        key_action_3()
+                    elif i == 4:
+                        key_action_4()
+                    elif i == 5:
+                        key_action_5()
+                    elif i == 6:
+                        key_action_6()
+                    elif i == 7:
+                        key_action_7()
+                    elif i == 8:
+                        key_action_8()
 
-    if pins[2].value:  
-        key_action_2()
+                    last_press_time[i] = current_time
+        else:
+            if button_state[i]:  
 
-    if pins[3].value:  
-        key_action_3()
-
-    if pins[4].value:  
-        key_action_4()
-
-    if pins[5].value:  
-        key_action_5()
-
-    if pins[6].value:  
-        key_action_6()
-
-    if pins[7].value:  
-        key_action_7()
-
-    if pins[8].value:  
-        key_action_8()
-
+                button_state[i] = False
     time.sleep(0.01)  
