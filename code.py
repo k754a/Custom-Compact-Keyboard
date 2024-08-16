@@ -9,27 +9,130 @@ keyboard = Keyboard(usb_hid.devices)
 
 pin_map = {
     0: board.GP0,  
-    1: board.GP3,  
-    2: board.GP4,  
-    3: board.GP6,  
-    4: board.GP7,  
-    5: board.GP8,  
-    6: board.GP5,  
-    7: board.GP2,  
-    8: board.GP1,  
+    1: board.GP1,  
+    2: board.GP2,  
+    3: board.GP3,  
+    4: board.GP4,  
+    5: board.GP5,  
+    6: board.GP6,  
+    7: board.GP7,  
+    8: board.GP8,  
 }
 
-keycodes = {
-    0: Keycode.ONE,   
-    1: Keycode.THREE,   
-    2: Keycode.FOUR, 
-    3: Keycode.FIVE,  
-    4: Keycode.SIX,  
-    5: Keycode.SEVEN,   
-    6: Keycode.EIGHT, 
-    7: Keycode.NINE, 
-    8: Keycode.TWO,  
-}
+def key_action_0():
+
+   
+
+def key_action_1():
+
+   
+
+def key_action_2():
+
+    print("Ending script...")
+    while True:
+        pass  
+
+def type_text(text):
+   
+    for char in text:
+        if char == ':':
+            keyboard.press(Keycode.SHIFT)
+            keyboard.press(Keycode.SEMICOLON)
+            keyboard.release_all()
+        elif char == '!':
+            keyboard.press(Keycode.SHIFT)
+            keyboard.press(Keycode.ONE)
+            keyboard.release_all()
+        elif char == '/':
+            keyboard.press(Keycode.SLASH)
+            keyboard.release_all()
+        elif char == '.':
+            keyboard.press(Keycode.PERIOD)
+            keyboard.release_all()
+        elif char == '\\':
+            keyboard.press(Keycode.BACKSLASH)
+            keyboard.release_all()
+        elif char == '_':
+            keyboard.press(Keycode.SHIFT)
+            keyboard.press(Keycode.MINUS)
+            keyboard.release_all()
+        elif char.isupper():
+            keyboard.press(Keycode.SHIFT)
+            keyboard.press(getattr(Keycode, f"{char}"))
+            keyboard.release_all()
+            time.sleep(0.1)
+            keyboard.release(Keycode.SHIFT)
+        elif char.islower():
+            keyboard.press(getattr(Keycode, f"{char.upper()}"))
+            keyboard.release_all()
+        elif char == ' ':
+            keyboard.press(Keycode.SPACE)
+            keyboard.release_all()
+        else:
+
+            pass
+        time.sleep(0.1)
+
+def key_action_3():
+
+    keyboard.press(Keycode.WINDOWS)
+    keyboard.press(Keycode.R)
+    keyboard.release_all()
+    time.sleep(0.5)
+    type_text("explorer.exe shell:appsFolder\\Microsoft.MinecraftUWP_8wekyb3d8bbwe!App")
+    keyboard.press(Keycode.ENTER)
+    keyboard.release_all()
+
+def key_action_4():
+
+    keyboard.press(Keycode.WINDOWS)
+    keyboard.press(Keycode.R)
+    keyboard.release_all()
+    time.sleep(0.5)
+    type_text("steam")
+    keyboard.press(Keycode.ENTER)
+    keyboard.release_all()
+
+def key_action_5():
+
+    keyboard.press(Keycode.WINDOWS)
+    keyboard.press(Keycode.R)
+    keyboard.release_all()
+    time.sleep(0.5)
+    type_text("nms")
+    keyboard.press(Keycode.ENTER)
+    keyboard.release_all()
+
+def key_action_6():
+
+    keyboard.press(Keycode.WINDOWS)
+    keyboard.press(Keycode.R)
+    keyboard.release_all()
+    time.sleep(0.5)
+    type_text("code")
+    keyboard.press(Keycode.ENTER)
+    keyboard.release_all()
+
+def key_action_7():
+
+    keyboard.press(Keycode.WINDOWS)
+    keyboard.press(Keycode.R)
+    keyboard.release_all()
+    time.sleep(0.5)
+    type_text("devenv")
+    keyboard.press(Keycode.ENTER)
+    keyboard.release_all()
+
+def key_action_8():
+
+    keyboard.press(Keycode.WINDOWS)
+    keyboard.press(Keycode.R)
+    keyboard.release_all()
+    time.sleep(0.5)
+    type_text("pycharm")
+    keyboard.press(Keycode.ENTER)
+    keyboard.release_all()
 
 pins = {}
 for i in range(9):  
@@ -37,48 +140,32 @@ for i in range(9):
     pins[i].direction = digitalio.Direction.INPUT
     pins[i].pull = digitalio.Pull.DOWN  
 
-def repeat_keypress(pin_index):
-    keycode = keycodes[pin_index]
-    initial_delay = 1.0  
-    repeat_delay = 0.1  
-
-    keyboard.press(keycode)
-    start_time = time.monotonic()
-
-    while pins[pin_index].value:
-        if time.monotonic() - start_time > initial_delay:
-            keyboard.release(keycode)
-            time.sleep(repeat_delay)
-            keyboard.press(keycode)
-
-    keyboard.release_all()  
-
 while True:
     if pins[0].value:  
-        repeat_keypress(0)
+        key_action_0()
 
     if pins[1].value:  
-        repeat_keypress(1)
+        key_action_1()
 
     if pins[2].value:  
-        repeat_keypress(2)
+        key_action_2()
 
     if pins[3].value:  
-        repeat_keypress(3)
+        key_action_3()
 
     if pins[4].value:  
-        repeat_keypress(4)
+        key_action_4()
 
     if pins[5].value:  
-        repeat_keypress(5)
+        key_action_5()
 
     if pins[6].value:  
-        repeat_keypress(6)
+        key_action_6()
 
     if pins[7].value:  
-        repeat_keypress(7)
+        key_action_7()
 
     if pins[8].value:  
-        repeat_keypress(8)
+        key_action_8()
 
     time.sleep(0.01)  
