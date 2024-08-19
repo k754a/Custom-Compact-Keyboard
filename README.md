@@ -1,4 +1,4 @@
-**Hi! This is my compact keyboard code, and the file to print out your own if you want!**
+**Hi! This is my custom compact keyboard code!**
 
 **How to Install:**
 
