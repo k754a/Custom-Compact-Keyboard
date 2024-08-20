@@ -1,4 +1,6 @@
-![image](https://github.com/user-attachments/assets/e28355d7-3c57-4b56-957f-1e023725238f)![image](https://github.com/user-attachments/assets/1ddbfb3d-917e-4645-812d-43ff1e04a48f)**Hi! This is my custom compact keyboard code!**
+**Hi! This is my custom compact keyboard code!**
+
+
 
 
 ![ScreenShot](https://raw.githubusercontent.com/k754a/Custom-Compact-Keyboard/main/git%20img/PXL_20240816_192529070.jpg)
