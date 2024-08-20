@@ -1,5 +1,7 @@
 **Hi! This is my custom compact keyboard code!**
 
+
+![Alt text]([http://full/path/to/img.jpg "Optional title"](https://github.com/k754a/Custom-Compact-Keyboard/blob/main/git%20img/PXL_20240816_192529070.jpg?raw=true))
 **How to Install:**
 
 1. Connect the Pico to your computer, holding down the BOOT button as you connect.
